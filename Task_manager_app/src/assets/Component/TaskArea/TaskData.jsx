@@ -1,6 +1,10 @@
 import React from "react";
 import { FaStar } from "react-icons/fa";
-export default function TaskData({ taskItem, handleSingleDelite }) {
+export default function TaskData({
+  taskItem,
+  handleSingleDelite,
+  handleEdite,
+}) {
   return (
     <div>
       <div className="overflow-auto">
@@ -67,7 +71,12 @@ export default function TaskData({ taskItem, handleSingleDelite }) {
                     >
                       Delete
                     </button>
-                    <button className="text-blue-500">Edit</button>
+                    <button
+                      onClick={() => handleEdite(task)}
+                      className="text-blue-500"
+                    >
+                      Edit
+                    </button>
                   </div>
                 </td>
               </tr>
