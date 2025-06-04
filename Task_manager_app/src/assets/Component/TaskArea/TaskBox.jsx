@@ -67,6 +67,20 @@ export default function TaskBox() {
       })
     );
   };
+
+  //delite all task handeler
+  const haddleDelliteAllTask = () => {
+    setTask("");
+  };
+
+  // data search handeler
+  const handleSearch = (value) => {
+    const filterdData = task.filter((singleTask) =>
+      //  if user give lowercase dat it will work properly
+      singleTask.title.toLowerCase().includes(value.toLowerCase())
+    );
+    setTask(filterdData);
+  };
   return (
     <>
       <section className="mb-20 mr-20 ml-20" id="tasks">
@@ -79,11 +93,14 @@ export default function TaskBox() {
         ) : null}
         <div className="container">
           <div className="p-2 flex justify-end">
-            <SearchBox />
+            <SearchBox handleSearch={handleSearch} />
           </div>
 
           <div className="rounded-xl border border-[rgba(206,206,206,0.12)] bg-[#1D212B] px-6 py-8 md:px-9 md:py-16">
-            <TaskAction setIsModal={setIsModal} />
+            <TaskAction
+              setIsModal={setIsModal}
+              haddleDelliteAllTask={haddleDelliteAllTask}
+            />
             <TaskData
               taskItem={task}
               handleSingleDelite={handleSingleDelite}
