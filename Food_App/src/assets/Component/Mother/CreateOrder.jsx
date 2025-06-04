@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
-export default function CreateOrder() {
+export default function CreateOrder({ setOrderUpdate, orderUpadte }) {
   const initialValue = [
     {
       id: "",
@@ -56,8 +56,18 @@ export default function CreateOrder() {
   };
 
   //   submite order data to dashbord
-  const handleGetOrder = () => {};
-  console.log("increment", updateCounter);
+  const handleGetOrder = () => {
+    setOrderUpdate([
+      {
+        id: Math.floor(100 + Math.random() * 900),
+        name: trackName,
+        price: updateCounter,
+        status: false,
+      },
+      ...orderUpadte,
+    ]);
+  };
+  //   console.log("kabir", orderUpadte);
 
   return (
     <div>
@@ -71,6 +81,7 @@ export default function CreateOrder() {
         <div class="mb-4">
           <label class="block text-sm font-medium mb-2">Customer Name</label>
           <input
+            value={trackName}
             onChange={(e) => setTrackName(e.target.value)}
             type="text"
             class="w-full bg-gray-700 bg-opacity-50 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary transition-all duration-300"
@@ -79,9 +90,9 @@ export default function CreateOrder() {
         <label class="block text-sm font-medium mb-2">Choose Items</label>
         <div class="mb-4">
           <div class="items-container">
-            {products.map((product) => (
+            {products.map((product, index) => (
               <div
-                key={product}
+                key={index}
                 class="bg-gray-700 bg-opacity-30 rounded-md p-3 mb-3 flex justify-between items-center hover:bg-opacity-40 transition-all duration-300"
               >
                 <div class="flex items-center">
