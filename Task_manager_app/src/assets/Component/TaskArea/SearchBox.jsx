@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function SearchBox() {
+export default function SearchBox({ handleSearch }) {
+  const [value, setValue] = useState();
+
+  const handleChange = (e) => {
+    e.preventDefault();
+    setValue(e.target.value);
+  };
   return (
     <div>
       <form>
@@ -12,9 +18,11 @@ export default function SearchBox() {
               className="z-20 block w-full bg-gray-800 px-4 py-2 pr-10 focus:outline-none"
               placeholder="Search Task"
               required
+              onChange={handleChange}
             />
             <button
-              type="submit"
+              onClick={() => handleSearch(value)}
+              type="button"
               className="absolute right-2 top-0 h-full rounded-e-lg text-white md:right-4"
             >
               <svg

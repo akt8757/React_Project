@@ -28,7 +28,7 @@ export default function TaskModal({
     });
   };
 
-  //   Mode AdData or editeData
+  //   Mode add dat / edite data
   const [isAdd, setrIsAdd] = useState(Object.is(editTask, null));
 
   return (
