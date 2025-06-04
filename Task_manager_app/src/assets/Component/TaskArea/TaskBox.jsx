@@ -37,9 +37,9 @@ export default function TaskBox() {
   };
 
   // data-delite-handeler
-  const handleSingleDelite = (data) => {
+  const handleSingleDelite = (taskId) => {
     const newFilteredAry = task.filter(
-      (filteredData) => filteredData.id != data
+      (filteredData) => filteredData.id != taskId
     );
     setTask(newFilteredAry);
   };
@@ -54,6 +54,18 @@ export default function TaskBox() {
   const handleModalClose = () => {
     setIsModal(false);
     setEditTask(null);
+  };
+
+  // handle task favorit togglr
+  const handleFavToggle = (taskId) => {
+    setTask(
+      task.map((singleTask) => {
+        if (singleTask.id === taskId) {
+          return { ...singleTask, isFavorit: !singleTask.isFavorit };
+        }
+        return singleTask;
+      })
+    );
   };
   return (
     <>
@@ -76,6 +88,7 @@ export default function TaskBox() {
               taskItem={task}
               handleSingleDelite={handleSingleDelite}
               handleEdite={handleEdite}
+              handleFavToggle={handleFavToggle}
             />
           </div>
         </div>

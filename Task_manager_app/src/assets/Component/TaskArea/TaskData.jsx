@@ -4,6 +4,7 @@ export default function TaskData({
   taskItem,
   handleSingleDelite,
   handleEdite,
+  handleFavToggle,
 }) {
   return (
     <div>
@@ -41,11 +42,13 @@ export default function TaskData({
                 className="border-b border-[#2E3443] [&>td]:align-baseline [&>td]:px-4 [&>td]:py-2"
               >
                 <td>
-                  {task.isFavorit ? (
-                    <FaStar color="yellow" />
-                  ) : (
-                    <FaStar color="gray" />
-                  )}
+                  <button onClick={() => handleFavToggle(task.id)}>
+                    {task.isFavorit ? (
+                      <FaStar color="yellow" />
+                    ) : (
+                      <FaStar color="gray" />
+                    )}
+                  </button>
                 </td>
                 <td>{task.title}</td>
                 <td>
