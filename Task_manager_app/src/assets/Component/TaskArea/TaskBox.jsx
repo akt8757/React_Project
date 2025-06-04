@@ -3,6 +3,7 @@ import SearchBox from "./SearchBox";
 import TaskAction from "./TaskAction";
 import TaskData from "./TaskData";
 import TaskModal from "./TaskModal";
+import NoTasksFound from "../NoTasksFound";
 
 export default function TaskBox() {
   const initialTask = {
@@ -70,7 +71,7 @@ export default function TaskBox() {
 
   //delite all task handeler
   const haddleDelliteAllTask = () => {
-    setTask("");
+    setTask([]);
   };
 
   // data search handeler
@@ -101,12 +102,16 @@ export default function TaskBox() {
               setIsModal={setIsModal}
               haddleDelliteAllTask={haddleDelliteAllTask}
             />
-            <TaskData
-              taskItem={task}
-              handleSingleDelite={handleSingleDelite}
-              handleEdite={handleEdite}
-              handleFavToggle={handleFavToggle}
-            />
+            {task.length > 0 ? (
+              <TaskData
+                taskItem={task}
+                handleSingleDelite={handleSingleDelite}
+                handleEdite={handleEdite}
+                handleFavToggle={handleFavToggle}
+              />
+            ) : (
+              <NoTasksFound />
+            )}
           </div>
         </div>
       </section>
