@@ -1,10 +1,10 @@
 import React from "react";
 
-export default function OrderSummery({
-  orderUpadte,
-  deliverUpdate,
-  orderStatus,
-}) {
+export default function OrderSummery({ orderUpadte }) {
+  const deliveredData = orderUpadte.filter((data) => data.status === true);
+  const pendingData = orderUpadte.filter((data) => data.status === false);
+
+  // console.log("asraful kabir", showData.length);
   return (
     <div>
       <div>
@@ -21,7 +21,7 @@ export default function OrderSummery({
 
           <div class="bg-cardbg rounded-lg p-4 relative overflow-hidden">
             <div class="text-5xl font-bold text-red-500 mb-2">
-              {orderStatus}
+              {pendingData.length}
             </div>
             <div class="bg-red-800 bg-opacity-50 text-red-200 text-xs font-medium px-3 py-1 rounded-full inline-block">
               Pending
@@ -30,7 +30,7 @@ export default function OrderSummery({
 
           <div class="bg-cardbg rounded-lg p-4 relative overflow-hidden">
             <div class="text-5xl font-bold text-green-500 mb-2">
-              {deliverUpdate}
+              {deliveredData.length}
             </div>
             <div class="bg-green-800 bg-opacity-50 text-green-200 text-xs font-medium px-3 py-1 rounded-full inline-block">
               Delivered

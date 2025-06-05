@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
-export default function CreateOrder({
-  setInitialOrder,
-  initialOrder,
-  setOrderStatus,
-  orderStatus,
-}) {
+export default function CreateOrder({ setInitialOrder, initialOrder }) {
   const initialValue = [
     {
       id: "",
@@ -71,7 +66,6 @@ export default function CreateOrder({
       },
       ...initialOrder,
     ]);
-    setOrderStatus(orderStatus + 1);
   };
 
   return (
