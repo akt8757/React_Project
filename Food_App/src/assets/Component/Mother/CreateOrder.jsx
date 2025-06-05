@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { FaPlus } from "react-icons/fa6";
 import { FaMinus } from "react-icons/fa6";
-export default function CreateOrder({ setOrderUpdate, orderUpadte }) {
+export default function CreateOrder({
+  setInitialOrder,
+  initialOrder,
+  setOrderStatus,
+  orderStatus,
+}) {
   const initialValue = [
     {
       id: "",
@@ -57,17 +62,17 @@ export default function CreateOrder({ setOrderUpdate, orderUpadte }) {
 
   //   submite order data to dashbord
   const handleGetOrder = () => {
-    setOrderUpdate([
+    setInitialOrder([
       {
         id: Math.floor(100 + Math.random() * 900),
         name: trackName,
         price: updateCounter,
         status: false,
       },
-      ...orderUpadte,
+      ...initialOrder,
     ]);
+    setOrderStatus(orderStatus + 1);
   };
-  //   console.log("kabir", orderUpadte);
 
   return (
     <div>

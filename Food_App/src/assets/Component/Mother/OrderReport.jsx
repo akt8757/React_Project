@@ -1,6 +1,13 @@
 import React from "react";
 
-export default function OrderReport({ orderUpadte }) {
+export default function OrderReport({
+  orderUpadte,
+  handleIsStatus,
+  handleDelite,
+  setFilterState,
+}) {
+  // console.log("asraful", orderUpadte);
+
   return (
     <div>
       <div>
@@ -22,7 +29,10 @@ export default function OrderReport({ orderUpadte }) {
             >
               <path d="M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z" />
             </svg>
-            <select class="appearance-none bg-zinc-900 accent-orange-600 border-none outline-none rounded-sm">
+            <select
+              onChange={(e) => setFilterState(e.target.value)}
+              class="appearance-none bg-zinc-900 accent-orange-600 border-none outline-none rounded-sm"
+            >
               <option>All</option>
               <option>Pending</option>
               <option>Delivered</option>
@@ -45,23 +55,35 @@ export default function OrderReport({ orderUpadte }) {
               <tbody class="text-sm">
                 {/* <!-- Row 1 --> */}
                 {orderUpadte.map((order, index) => (
-                  <tr class="border-t border-gray-700">
+                  <tr key={order.id} class="border-t border-gray-700">
                     <td class="py-3">{order.id}</td>
                     <td class="py-3">{order.name}</td>
                     <td class="py-3">{index + 1}</td>
                     <td class="py-3">{order.price}</td>
                     <td class="py-3">
                       <span class="text-red-500">
-                        {order.status ? "DELIVER" : "PENDING"}
+                        {order.status ? (
+                          <span className="text-green-500">DELIVER</span>
+                        ) : (
+                          "PENDING"
+                        )}
                       </span>
                     </td>
                     <td class="py-3">
-                      <button class="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300">
+                      <button
+                        onClick={() => handleDelite(order.id, order.status)}
+                        class="bg-gray-800 hover:bg-red-600 text-xs px-3 py-1 rounded-full mr-1 transition-colors duration-300"
+                      >
                         Delete
                       </button>
-                      <button class="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300">
-                        DELIVER
-                      </button>
+                      {!order.status ? (
+                        <button
+                          onClick={() => handleIsStatus(order.id)}
+                          class="bg-gray-800 hover:bg-green-600 text-xs px-3 py-1 rounded-full transition-colors duration-300"
+                        >
+                          DELIVER
+                        </button>
+                      ) : null}
                     </td>
                   </tr>
                 ))}

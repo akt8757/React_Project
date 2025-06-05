@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function OrderSummery({ orderUpadte }) {
+export default function OrderSummery({
+  orderUpadte,
+  deliverUpdate,
+  orderStatus,
+}) {
   return (
     <div>
       <div>
@@ -16,14 +20,18 @@ export default function OrderSummery({ orderUpadte }) {
           </div>
 
           <div class="bg-cardbg rounded-lg p-4 relative overflow-hidden">
-            <div class="text-5xl font-bold text-red-500 mb-2">7</div>
+            <div class="text-5xl font-bold text-red-500 mb-2">
+              {orderStatus}
+            </div>
             <div class="bg-red-800 bg-opacity-50 text-red-200 text-xs font-medium px-3 py-1 rounded-full inline-block">
               Pending
             </div>
           </div>
 
           <div class="bg-cardbg rounded-lg p-4 relative overflow-hidden">
-            <div class="text-5xl font-bold text-green-500 mb-2">1</div>
+            <div class="text-5xl font-bold text-green-500 mb-2">
+              {deliverUpdate}
+            </div>
             <div class="bg-green-800 bg-opacity-50 text-green-200 text-xs font-medium px-3 py-1 rounded-full inline-block">
               Delivered
             </div>
