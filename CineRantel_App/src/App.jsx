@@ -1,5 +1,18 @@
+import Content from "./assets/Component/Content";
+import Footer from "./assets/Component/Footer";
+import Header from "./assets/Component/Header";
+import Sidebar from "./assets/Component/Sidebar";
 function App() {
-  return <h1 className="text-3xl font-bold underline">this is kabir</h1>;
+  return (
+    <>
+      <Header />;
+      <div className="container grid lg:grid-cols-[218px_1fr] gap-[3.5rem]">
+        <Sidebar />
+        <Content />
+      </div>
+      <Footer />
+    </>
+  );
 }
 
 export default App;
