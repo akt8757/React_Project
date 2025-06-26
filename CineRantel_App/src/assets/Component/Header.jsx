@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import { shoppingContext } from "../Context";
 import logo from "../icons/logo.svg";
 import gear from "../icons/gear.svg";
 import moon from "../icons/moon.svg";
 import cart from "../icons/shopping-cart.svg";
 import ShoppingCart from "./ShoppingCart";
+
 export default function Header() {
+  const addToCart = useContext(shoppingContext);
+
   const [isCart, setIsCart] = useState(false);
+
   return (
     <>
       {isCart && <ShoppingCart onCloseCart={() => setIsCart(false)} />}
