@@ -1,7 +1,7 @@
 import React from "react";
 import { GetMoviImg } from "../utils/movie-utils";
 
-export default function MovieModal({ onCloseModal, movie, getSingleMovie }) {
+export default function MovieModal({ onCloseModal, movie, onGetMovie }) {
   return (
     <div className="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[984px] p-4 max-h-[90vh] overflow-auto">
@@ -27,7 +27,7 @@ export default function MovieModal({ onCloseModal, movie, getSingleMovie }) {
             <div className="grid  lg:grid-cols-2 gap-2">
               <button
                 className="bg-primary rounded-lg py-2 px-5 flex items-center justify-center gap-2 text-[#171923] font-semibold text-sm"
-                onClick={(e) => getSingleMovie(e)}
+                onClick={(e) => onGetMovie(e, movie)}
               >
                 <img src="./assets/tag.svg" alt="" />
                 <span>${movie.price} | Add to Cart</span>
