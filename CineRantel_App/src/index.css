@@ -7,3 +7,6 @@
   padding: 1.25rem;
   margin: auto;
 }
+.dark {
+  @apply bg-[#171923] text-white;
+}

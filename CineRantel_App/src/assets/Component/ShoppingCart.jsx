@@ -15,7 +15,7 @@ export default function ShoppingCart({ onCloseCart }) {
     <>
       <div class="fixed top-0 left-0 w-screen h-screen z-50 bg-black/60 backdrop-blur-sm">
         <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[420px] sm:max-w-[600px] lg:max-w-[790px] p-4 max-h-[90vh] overflow-auto">
-          <div class="bg-white shadow-md dark:bg-[#fff] rounded-2xl overflow-hidden p-5 md:p-9">
+          <div class="bg-white shadow-md dark:bg-black rounded-2xl overflow-hidden p-5 md:p-9">
             <h2 class="text-2xl lg:text-[30px] mb-10 font-bold">Your Carts</h2>
             {addToCart.map((cart) => (
               <div class="space-y-8 lg:space-y-12 max-h-[450px] overflow-auto mb-10 lg:mb-14">

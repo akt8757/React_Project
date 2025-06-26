@@ -1,14 +1,15 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import { shoppingContext } from "../Context";
 import logo from "../icons/logo.svg";
 import gear from "../icons/gear.svg";
 import moon from "../icons/moon.svg";
+import sun from "../icons/sun.svg";
 import cart from "../icons/shopping-cart.svg";
 import ShoppingCart from "./ShoppingCart";
+import { themeContext } from "../Context";
 
 export default function Header() {
-  const addToCart = useContext(shoppingContext);
+  const { darkMode, setDarkMode } = useContext(themeContext);
 
   const [isCart, setIsCart] = useState(false);
 
@@ -34,8 +35,14 @@ export default function Header() {
               <a
                 className="bg-primary/20 dark:bg-primary/[7%] rounded-lg backdrop-blur-[2px] p-1 inline-block"
                 href="#"
+                onClick={() => setDarkMode(!darkMode)}
               >
-                <img src={moon} width="24" height="24" alt="" />
+                <img
+                  src={darkMode ? sun : moon}
+                  width="24"
+                  height="24"
+                  alt=""
+                />
               </a>
             </li>
             <li>
