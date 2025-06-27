@@ -8,7 +8,7 @@ import { themeContext } from "./assets/Context";
 
 function App() {
   const [addToCart, setAddToCart] = useState([]);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   return (
     <div className={`h-full w-full ${darkMode ? "dark" : ""}`}>
