@@ -6,10 +6,11 @@ import Filter from "./assets/Ecommerce/Filter";
 import NewsLatter from "./assets/Ecommerce/NewsLatter";
 import OrderSummery from "./assets/Ecommerce/OrderSummery";
 import ProductList from "./assets/Ecommerce/ProductList";
+import Store from "./assets/store";
 
 function App() {
   return (
-    <>
+    <Store>
       <AnounceBar />
       <Header />
       <main className="container mx-auto px-4 md:px-8 py-8">
@@ -31,7 +32,7 @@ function App() {
       </main>
       <NewsLatter />
       <Footer />
-    </>
+    </Store>
   );
 }
 
