@@ -8,3 +8,6 @@ export const filterContext = createContext();
 
 // mutable Context
 export const mutableContext = createContext();
+
+//add to cart
+export const cartContext = createContext();

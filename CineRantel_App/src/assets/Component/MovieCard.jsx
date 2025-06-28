@@ -9,6 +9,7 @@ export default function MovieCard({ movie }) {
   const [getSingleMovie, setGetSingleMovie] = useState(null);
 
   const { addToCart, setAddToCart } = useContext(shoppingContext);
+  console.log("master", addToCart);
   const handleSingleMovie = (movie) => {
     setIsModal(true);
     setGetSingleMovie(movie);

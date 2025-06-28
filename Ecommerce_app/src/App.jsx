@@ -23,8 +23,6 @@ function App() {
             <div class="bg-white rounded-lg p-6 border border-gray-200">
               <h2 class="text-2xl font-bold mb-6">YOUR CART</h2>
               <CartItem />
-              <CartItem />
-              <CartItem />
               <OrderSummery />
             </div>
           </div>
