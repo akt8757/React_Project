@@ -1,7 +1,33 @@
-import React from "react";
+import React, { useContext } from "react";
 import { getProductImage } from "../utils/pcoduct-utils";
+import Reaction from "./Reaction";
+import { cartContext } from "../ContextProvider";
+import { renderContext } from "../ContextProvider";
 
 export default function ProductCard({ product }) {
+  const { isCart, setIsCart } = useContext(cartContext);
+  const { renderProductList, setRenderProductList } = useContext(renderContext);
+
+  // add data to cart component
+  const handleAddCart = (product) => {
+    let found = isCart.find((item) => item.id === product.id);
+    if (!found) {
+      setIsCart([...isCart, product]);
+    } else {
+      console.log("Already Added");
+    }
+  };
+
+  // remove data from cart component
+  const handleRemoveCart = (product) => {
+    const deliteCart = isCart.filter((data) => data.id !== product.id);
+    setIsCart(deliteCart);
+  };
+
+  // whene clickd to cart button it will switch to remove button
+
+  const toggleButton = isCart.find((item) => item.id === product.id);
+
   return (
     <div>
       <div className="bg-gray-100 rounded-lg overflow-hidden transition-transform hover:scale-[1.02] duration-300">
@@ -16,13 +42,7 @@ export default function ProductCard({ product }) {
           <h3 className="font-medium">{product.title} </h3>
           <div className="flex items-center justify-between">
             <div className="flex items-center my-1">
-              <div className="flex text-yellow-400">
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span>★</span>
-                <span className="text-gray-300">★</span>
-              </div>
+              <Reaction reaction={product.reaction} />
               <span className="text-xs text-gray-500 ml-1">
                 {product.reaction}/5
               </span>
@@ -32,9 +52,28 @@ export default function ProductCard({ product }) {
             </span>
           </div>
           <p className="font-bold">${product.price} </p>
-          <button className="w-full mt-2 bg-red-800 py-1 text-gray-100 rounded flex items-center justify-center">
-            Remove from Cart
-          </button>
+          {toggleButton ? (
+            <button
+              onClick={() => handleRemoveCart(product)}
+              className="w-full mt-2 bg-red-800 py-1 text-gray-100 rounded flex items-center justify-center"
+            >
+              Remove from cart
+            </button>
+          ) : product.quantity === 0 ? (
+            <button
+              disabled
+              className="disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed w-full mt-2 bg-gray-800 py-1 text-gray-100 rounded flex items-center justify-center active:translate-y-1 transition-all active:bg-gray-900"
+            >
+              Out of stock
+            </button>
+          ) : (
+            <button
+              onClick={() => handleAddCart(product)}
+              className="disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed w-full mt-2 bg-gray-800 py-1 text-gray-100 rounded flex items-center justify-center active:translate-y-1 transition-all active:bg-gray-900"
+            >
+              Add to cart
+            </button>
+          )}
         </div>
       </div>
     </div>

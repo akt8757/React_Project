@@ -3,6 +3,7 @@ import { renderContext } from "./ContextProvider";
 import { mainProductList } from "./Data/data";
 import { mutableContext } from "./ContextProvider";
 import { filterContext } from "./ContextProvider";
+import { cartContext } from "./ContextProvider";
 
 export default function Store({ children }) {
   // mutable stste
@@ -12,7 +13,8 @@ export default function Store({ children }) {
   // filtaring state
   const [filtaringProductList, setFilterindProductList] =
     useState(renderProductList);
-
+  //product cart state
+  const [isCart, setIsCart] = useState([]);
   return (
     <div>
       <mutableContext.Provider value={{ productList, setProductList }}>
@@ -22,7 +24,9 @@ export default function Store({ children }) {
           <filterContext.Provider
             value={{ filtaringProductList, setFilterindProductList }}
           >
-            {children}
+            <cartContext.Provider value={{ isCart, setIsCart }}>
+              {children}
+            </cartContext.Provider>
           </filterContext.Provider>
         </renderContext.Provider>
       </mutableContext.Provider>
