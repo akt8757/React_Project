@@ -7,7 +7,7 @@ import { renderContext } from "../ContextProvider";
 export default function ProductCard({ product }) {
   const { isCart, setIsCart } = useContext(cartContext);
   const { renderProductList, setRenderProductList } = useContext(renderContext);
-
+  // console.log("this is kabir", product.quantity);
   // add data to cart component
   const handleAddCart = (product) => {
     let found = isCart.find((item) => item.id === product.id);
@@ -52,19 +52,20 @@ export default function ProductCard({ product }) {
             </span>
           </div>
           <p className="font-bold">${product.price} </p>
-          {toggleButton ? (
-            <button
-              onClick={() => handleRemoveCart(product)}
-              className="w-full mt-2 bg-red-800 py-1 text-gray-100 rounded flex items-center justify-center"
-            >
-              Remove from cart
-            </button>
-          ) : product.quantity === 0 ? (
+          {}
+          {product.quantity === 0 ? (
             <button
               disabled
               className="disabled:bg-gray-700 disabled:text-gray-400 disabled:cursor-not-allowed w-full mt-2 bg-gray-800 py-1 text-gray-100 rounded flex items-center justify-center active:translate-y-1 transition-all active:bg-gray-900"
             >
               Out of stock
+            </button>
+          ) : toggleButton ? (
+            <button
+              onClick={() => handleRemoveCart(product)}
+              className="w-full mt-2 bg-red-800 py-1 text-gray-100 rounded flex items-center justify-center"
+            >
+              Remove from cart
             </button>
           ) : (
             <button
