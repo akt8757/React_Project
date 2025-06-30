@@ -5,8 +5,8 @@ export const mainProductList = [
     image: "image 1.png",
     reaction: 4,
     price: 123,
-    quantity: 132,
-    cart: false,
+    quantity: 5,
+    cartItem: 1,
     date: false,
   },
   {
@@ -16,7 +16,7 @@ export const mainProductList = [
     reaction: 5,
     price: 120,
     quantity: 256,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
   {
@@ -26,7 +26,7 @@ export const mainProductList = [
     reaction: 4,
     price: 240,
     quantity: 0,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
   {
@@ -36,7 +36,7 @@ export const mainProductList = [
     reaction: 5,
     price: 380,
     quantity: 250,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
   {
@@ -46,7 +46,7 @@ export const mainProductList = [
     reaction: 5,
     price: 380,
     quantity: 300,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
   {
@@ -56,7 +56,7 @@ export const mainProductList = [
     reaction: 3,
     price: 380,
     quantity: 480,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
   {
@@ -66,7 +66,7 @@ export const mainProductList = [
     reaction: 2,
     price: 380,
     quantity: 50,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
   {
@@ -76,7 +76,7 @@ export const mainProductList = [
     reaction: 4,
     price: 380,
     quantity: 10,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
   {
@@ -86,7 +86,7 @@ export const mainProductList = [
     reaction: 5,
     price: 380,
     quantity: 500,
-    cart: false,
+    cartItem: 0,
     date: false,
   },
 ];
