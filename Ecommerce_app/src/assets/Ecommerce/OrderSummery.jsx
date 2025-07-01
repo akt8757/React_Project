@@ -1,6 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
+import { cartContext } from "../ContextProvider";
 
 export default function OrderSummery() {
+  const { isCart, setIsCart } = useContext(cartContext);
+
+  let isdeliveriyfeeAda = 0;
+
+  if (isCart.length > 0) {
+    isdeliveriyfeeAda = 15;
+  }
+  const totalPrice = isCart.reduce(
+    (fistVal, cart) => fistVal + cart.cartPrice,
+    0
+  );
+  const discount = (totalPrice / 100) * 2;
+  const afterDiscount = totalPrice - discount;
+  const roundPrice = afterDiscount + isdeliveriyfeeAda;
+  const finalPrice = Math.round(roundPrice);
   return (
     <div>
       <div className="mt-6">
@@ -9,11 +25,11 @@ export default function OrderSummery() {
         <div className="space-y-2 mb-4">
           <div className="flex justify-between">
             <span className="text-gray-600">Subtotal</span>
-            <span className="font-medium">$565</span>
+            <span className="font-medium">${totalPrice}</span>
           </div>
           <div className="flex justify-between text-red-500">
             <span>Discount (-20%)</span>
-            <span>-$113</span>
+            <span>-${discount}</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-600">Delivery Fee</span>
@@ -21,7 +37,7 @@ export default function OrderSummery() {
           </div>
           <div className="flex justify-between font-bold text-lg pt-2 border-t border-gray-200">
             <span>Total</span>
-            <span>$467</span>
+            <span>${finalPrice}</span>
           </div>
         </div>
 

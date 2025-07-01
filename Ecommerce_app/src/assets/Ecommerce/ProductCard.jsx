@@ -7,7 +7,7 @@ import { renderContext } from "../ContextProvider";
 export default function ProductCard({ product }) {
   const { isCart, setIsCart } = useContext(cartContext);
   const { renderProductList, setRenderProductList } = useContext(renderContext);
-  // console.log("this is kabir", product.quantity);
+
   // add data to cart component
   const handleAddCart = (product) => {
     let found = isCart.find((item) => item.id === product.id);
@@ -16,10 +16,37 @@ export default function ProductCard({ product }) {
     } else {
       console.log("Already Added");
     }
+    // update render on click
+    const updateRenderProduct = renderProductList.map((item) => {
+      if (item.id === product.id) {
+        return { ...item, quantity: item.quantity - 1 };
+      }
+      return item;
+    });
+    setRenderProductList(updateRenderProduct);
+
+    // update cartitem on click
+    // const updateCart = isCart.map((cart) => {
+    //   if (cart.id === product.id) {
+    //     return { ...cart, cart: cart.cartItem + 1 };
+    //   }
+    //   return cart;
+    // });
+    // setIsCart(updateCart);
   };
 
   // remove data from cart component
   const handleRemoveCart = (product) => {
+    const updatedData = renderProductList.map((list) => {
+      if (product.id === list.id) {
+        return {
+          ...list,
+          quantity: list.quantity + list.cartItem,
+        };
+      }
+      return list;
+    });
+    setRenderProductList(updatedData);
     const deliteCart = isCart.filter((data) => data.id !== product.id);
     setIsCart(deliteCart);
   };
