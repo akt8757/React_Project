@@ -15,6 +15,7 @@ export default function Store({ children }) {
     useState(renderProductList);
   //product cart state
   const [isCart, setIsCart] = useState([]);
+  console.log("filtered", filtaringProductList);
   return (
     <div>
       <mutableContext.Provider value={{ productList, setProductList }}>
