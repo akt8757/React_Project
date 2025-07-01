@@ -9,11 +9,24 @@ export default function CartItem() {
   const { isCart, setIsCart } = useContext(cartContext);
   const { renderProductList, setRenderProductList } = useContext(renderContext);
   const [api, contextHolder] = notification.useNotification();
-  const openNotificationWithIcon = (type) => {
+  const openNotificationWithIcon = (type, message, description) => {
     api[type]({
-      message: "Notification Title",
-      description:
-        "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+      message,
+      description,
+      style: {
+        backgroundColor: "#fff2f0",
+        color: "#a8071a",
+      },
+      showProgress: true,
+    });
+
+    api[kabir]({
+      message: "kabir",
+      style: {
+        backgroundColor: "#fff2f0",
+        color: "#a8071a",
+      },
+      showProgress: true,
     });
   };
 
@@ -53,10 +66,12 @@ export default function CartItem() {
         let newPrice = item.cartPrice;
         if (action === "increment") {
           if (priceAdjuist.quantity === 0) {
-            openNotificationWithIcon("success") && newPrice;
+            openNotificationWithIcon("warning", "Stor is empty");
+            newPrice;
           } else newPrice = item.cartPrice + item.price;
         } else if (action === "decrement") {
           if (newPrice === priceAdjuist.price) {
+            openNotificationWithIcon("warning", "Take mimnimum 1 product");
             newPrice = item.price;
           } else newPrice = item.cartPrice - item.price;
         }

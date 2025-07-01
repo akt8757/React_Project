@@ -1,5 +1,7 @@
 import React, { useContext, useState } from "react";
 import { cartContext } from "../ContextProvider";
+import { renderContext } from "../ContextProvider";
+import { filterContext } from "../ContextProvider";
 // import CartDrawer from "./CartDrawer";
 import { Drawer } from "antd";
 import CartItem from "../Ecommerce/CartItem";
@@ -7,13 +9,31 @@ import OrderSummery from "../Ecommerce/OrderSummery";
 
 export default function Header() {
   const { isCart, setIsCart } = useContext(cartContext);
+  const { renderProductList, setRenderProductList } = useContext(renderContext);
+  const { filtaringProductList, setFilterindProductList } =
+    useContext(filterContext);
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [isFilter, setIsFilter] = useState("");
+
   const handleopenDrawer = () => {
     setOpenDrawer(true);
   };
   const onClose = () => {
     setOpenDrawer(!openDrawer);
   };
+
+  const handleChange = (e) => {
+    // let inputVal = ;
+    setIsFilter(e.target.value);
+    const filteredData = filtaringProductList.filter((val) => {
+      if (isFilter === "") {
+        return filtaringProductList;
+      }
+      return val.title.toLowerCase().includes(isFilter.toLowerCase());
+    });
+    setRenderProductList(filteredData);
+  };
+
   return (
     <>
       <Drawer
@@ -50,6 +70,7 @@ export default function Header() {
           <div className="flex items-center space-x-4">
             <div className="relative hidden md:block w-64">
               <input
+                onChange={(e) => handleChange(e)}
                 type="text"
                 placeholder="Search for products..."
                 className="w-full bg-gray-100 rounded-full py-2 px-4 text-sm"
