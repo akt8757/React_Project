@@ -3,10 +3,19 @@ import { cartContext } from "../ContextProvider";
 import { renderContext } from "../ContextProvider";
 import { getProductImage } from "../utils/pcoduct-utils";
 import { MdRemoveCircle } from "react-icons/md";
+import { Button, notification, Space } from "antd";
 
 export default function CartItem() {
   const { isCart, setIsCart } = useContext(cartContext);
   const { renderProductList, setRenderProductList } = useContext(renderContext);
+  const [api, contextHolder] = notification.useNotification();
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: "Notification Title",
+      description:
+        "This is the content of the notification. This is the content of the notification. This is the content of the notification.",
+    });
+  };
 
   const handleCartRemove = (cart) => {
     const updatedData = renderProductList.map((list) => {
@@ -19,59 +28,71 @@ export default function CartItem() {
       return list;
     });
     setRenderProductList(updatedData);
-    console.log("master", updatedData);
     const filtaredData = isCart.filter((data) => data.id !== cart.id);
     setIsCart(filtaredData);
   };
 
+  //adjust cart count
   const handleProductCount = (productId, action) => {
-    const updateCart = isCart.map((item) => {
-      let newCart;
+    const updatedCart = isCart.map((item) => {
       if (item.id === productId) {
+        let newCartItem = item.cartItem;
+
         if (action === "increment") {
-          renderProductList.forEach((list) => {
-            if (list.id === productId) {
-              if (list.quantity === 0) {
-                newCart = item.cartItem;
-              } else newCart = item.cartItem + 1;
-            }
-          });
+          const product = renderProductList.find((p) => p.id === productId);
+          if (product?.quantity > 0) {
+            newCartItem += 1;
+          }
         } else if (action === "decrement") {
-          newCart = item.cartItem - 1;
-          if (newCart < 1) {
-            newCart = 1;
+          newCartItem = Math.max(1, newCartItem - 1);
+        }
+
+        // price adjust
+        const priceAdjuist = renderProductList.find((p) => p.id === productId);
+        console.log("kkk", item.price);
+        let newPrice = item.cartPrice;
+        if (action === "increment") {
+          if (priceAdjuist.quantity === 0) {
+            openNotificationWithIcon("success") && newPrice;
+          } else newPrice = item.cartPrice + item.price;
+        } else if (action === "decrement") {
+          if (newPrice === priceAdjuist.price) {
+            newPrice = item.price;
+          } else newPrice = item.cartPrice - item.price;
+        }
+
+        return { ...item, cartItem: newCartItem, cartPrice: newPrice };
+      }
+      return item;
+    });
+
+    setIsCart(updatedCart);
+
+    const updatedStore = renderProductList.map((item) => {
+      if (item.id === productId) {
+        let newQuantity = item.quantity;
+
+        if (action === "increment" && item.quantity > 0) {
+          newQuantity -= 1;
+        } else if (action === "decrement") {
+          const cartItem =
+            isCart.find((p) => p.id === productId)?.cartItem || 1;
+          if (cartItem > 1) {
+            newQuantity += 1;
           }
         }
-        return { ...item, cartItem: newCart };
-      }
-      return item;
-    });
-    setIsCart(updateCart);
 
-    const updateStore = renderProductList.map((item) => {
-      let updateValue;
-      if (item.id === productId) {
-        if (action === "increment") {
-          if (item.quantity === 0) {
-            updateValue = 0;
-          } else updateValue = item.quantity - 1;
-        } else if (action === "decrement") {
-          isCart.forEach((list) => {
-            if (list.id === productId) {
-              if (list.cartItem === 1) {
-                updateValue = item.quantity;
-              } else updateValue = item.quantity + 1;
-            }
-          });
-        }
-        return { ...item, quantity: updateValue };
+        return { ...item, quantity: newQuantity };
       }
       return item;
     });
-    setRenderProductList(updateStore);
+
+    setRenderProductList(updatedStore);
   };
+
   return (
     <div>
+      {contextHolder}
       {isCart.map((cart) => (
         <div
           key={cart.id}
@@ -97,7 +118,7 @@ export default function CartItem() {
             <p className="text-sm text-gray-500">Size: Large</p>
             <p className="text-sm text-gray-500">Color: White</p>
             <div className="flex justify-between items-center mt-2">
-              <p className="font-bold">${cart.price}</p>
+              <p className="font-bold">${cart.cartPrice}</p>
               <div className="flex items-center space-x-2">
                 <button
                   onClick={() => handleProductCount(cart.id, "decrement")}

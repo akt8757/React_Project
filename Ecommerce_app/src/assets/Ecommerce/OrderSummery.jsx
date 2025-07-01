@@ -9,7 +9,10 @@ export default function OrderSummery() {
   if (isCart.length > 0) {
     isdeliveriyfeeAda = 15;
   }
-  const totalPrice = isCart.reduce((fistVal, cart) => fistVal + cart.price, 0);
+  const totalPrice = isCart.reduce(
+    (fistVal, cart) => fistVal + cart.cartPrice,
+    0
+  );
   const discount = (totalPrice / 100) * 2;
   const afterDiscount = totalPrice - discount;
   const roundPrice = afterDiscount + isdeliveriyfeeAda;

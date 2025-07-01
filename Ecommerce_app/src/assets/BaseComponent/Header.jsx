@@ -1,8 +1,31 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { cartContext } from "../ContextProvider";
+// import CartDrawer from "./CartDrawer";
+import { Drawer } from "antd";
+import CartItem from "../Ecommerce/CartItem";
+import OrderSummery from "../Ecommerce/OrderSummery";
 
 export default function Header() {
+  const { isCart, setIsCart } = useContext(cartContext);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const handleopenDrawer = () => {
+    setOpenDrawer(true);
+  };
+  const onClose = () => {
+    setOpenDrawer(!openDrawer);
+  };
   return (
     <>
+      <Drawer
+        title="Cart Item"
+        closable={{ "aria-label": "Close Button" }}
+        onClose={onClose}
+        open={openDrawer}
+      >
+        <CartItem />
+        <OrderSummery />
+      </Drawer>
+      {/* <CartDrawer openDrawer={openDrawer} /> */}
       <header className="border-b border-gray-200 py-4 px-4 md:px-8">
         <div className="container mx-auto flex items-center justify-between">
           <a href="#" className="text-2xl font-bold">
@@ -49,7 +72,11 @@ export default function Header() {
               </span>
             </div>
 
-            <a href="#" className="hover:text-gray-500 transition-colors">
+            <a
+              href="#"
+              className="hover:text-gray-500 transition-colors relative"
+              onClick={() => handleopenDrawer(true)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -64,6 +91,9 @@ export default function Header() {
                   d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
                 />
               </svg>
+              <span className="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full shadow">
+                {isCart.length}
+              </span>
             </a>
 
             <a href="#" className="hover:text-gray-500 transition-colors">
