@@ -13,15 +13,7 @@ export default function CartItem() {
     api[type]({
       message,
       description,
-      style: {
-        backgroundColor: "#fff2f0",
-        color: "#a8071a",
-      },
-      showProgress: true,
-    });
-
-    api[kabir]({
-      message: "kabir",
+      placement: "top",
       style: {
         backgroundColor: "#fff2f0",
         color: "#a8071a",
@@ -66,7 +58,7 @@ export default function CartItem() {
         let newPrice = item.cartPrice;
         if (action === "increment") {
           if (priceAdjuist.quantity === 0) {
-            openNotificationWithIcon("warning", "Stor is empty");
+            openNotificationWithIcon("warning", "Store is empty");
             newPrice;
           } else newPrice = item.cartPrice + item.price;
         } else if (action === "decrement") {
