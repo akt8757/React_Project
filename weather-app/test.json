@@ -1,0 +1,47 @@
+{
+  "location": {
+    "name": "Dinajpur",
+    "region": "",
+    "country": "Bangladesh",
+    "lat": 25.633,
+    "lon": 88.633,
+    "tz_id": "Asia/Dhaka",
+    "localtime_epoch": 1752472572,
+    "localtime": "2025-07-14 11:56"
+  },
+  "current": {
+    "last_updated_epoch": 1752471900,
+    "last_updated": "2025-07-14 11:45",
+    "temp_c": 28.5,
+    "temp_f": 83.3,
+    "is_day": 1,
+    "condition": {
+      "text": "Cloudy",
+      "icon": "//cdn.weatherapi.com/weather/64x64/day/119.png",
+      "code": 1006
+    },
+    "wind_mph": 12.1,
+    "wind_kph": 19.4,
+    "wind_degree": 92,
+    "wind_dir": "E",
+    "pressure_mb": 1004.0,
+    "pressure_in": 29.64,
+    "precip_mm": 0.0,
+    "precip_in": 0.0,
+    "humidity": 74,
+    "cloud": 86,
+    "feelslike_c": 32.4,
+    "feelslike_f": 90.4,
+    "windchill_c": 28.5,
+    "windchill_f": 83.3,
+    "heatindex_c": 32.4,
+    "heatindex_f": 90.4,
+    "dewpoint_c": 23.4,
+    "dewpoint_f": 74.1,
+    "vis_km": 10.0,
+    "vis_miles": 6.0,
+    "uv": 4.8,
+    "gust_mph": 15.9,
+    "gust_kph": 25.6
+  }
+}
