@@ -54,7 +54,7 @@ export default function CartItem() {
 
         // price adjust
         const priceAdjuist = renderProductList.find((p) => p.id === productId);
-        console.log("kkk", item.price);
+
         let newPrice = item.cartPrice;
         if (action === "increment") {
           if (priceAdjuist.quantity === 0) {

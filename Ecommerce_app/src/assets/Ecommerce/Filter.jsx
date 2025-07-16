@@ -20,17 +20,19 @@ export default function Filter() {
         (product) => product.reaction === 5
       );
       setRenderProductList(filteredData);
-      console.log("result", filteredData);
     } else if (data === "All Product") {
       setRenderProductList(productList);
     } else if (data === "Price: Low to High") {
-      const result = filtaringProductList.slice().sort((a, b) => a.price - b.price);
-      console.log("result", result);
+      const result = filtaringProductList
+        .slice()
+        .sort((a, b) => a.price - b.price);
+
       setRenderProductList(result);
     } else if (data === "Price: High to Low") {
-      const result = filtaringProductList.slice().sort((a, b) => b.price - a
-      .price);
-      console.log("result", result);
+      const result = filtaringProductList
+        .slice()
+        .sort((a, b) => b.price - a.price);
+
       setRenderProductList(result);
     }
   };

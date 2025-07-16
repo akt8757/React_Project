@@ -1,4 +1,4 @@
-import { Children } from "react";
+import { Children, useEffect } from "react";
 import { useState } from "react";
 import { weatherContext } from "./Context";
 import useWeather from "./Hooks/useWeather";
@@ -8,23 +8,26 @@ import { locationContext } from "./Context";
 
 export default function Store({ children }) {
   const WeatherData = useWeather();
-  const [favoritLocation, setFavoritLocation] = useState([
-    {
-      city: "dhaka",
-      latitude: 25.74664,
-      longitude: 89.25166,
-    },
-  ]);
+
+  const [favoritLocation, setFavoritLocation] = useState(() => {
+    const saved = localStorage.getItem("favoritLocation");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("favoritLocation", JSON.stringify(favoritLocation));
+  }, [favoritLocation]);
+
   return (
     <div>
       <ConfigProvider theme={antdThemeConfig}>
-        <weatherContext.Provider value={{ WeatherData }}>
-          <locationContext.Provider
-            value={{ favoritLocation, setFavoritLocation }}
-          >
+        <locationContext.Provider
+          value={{ favoritLocation, setFavoritLocation }}
+        >
+          <weatherContext.Provider value={{ WeatherData }}>
             {children}
-          </locationContext.Provider>
-        </weatherContext.Provider>
+          </weatherContext.Provider>
+        </locationContext.Provider>
       </ConfigProvider>
     </div>
   );

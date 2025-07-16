@@ -19,7 +19,7 @@ const useWeather = () => {
 
   const fetchWeatherData = async (latitude, longitude) => {
     try {
-      loading(true);
+      setloading(true);
       const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
       const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${latitude},${longitude}`;
       const response = await fetch(url);
@@ -39,7 +39,6 @@ const useWeather = () => {
         icon: data.current.condition.icon,
       };
       setWeather(updateWeather);
-      console.log("asraful", latitude, longitude);
     } catch (err) {
       setError(err);
     } finally {
@@ -47,17 +46,13 @@ const useWeather = () => {
     }
   };
 
-  // useEffect(() => {
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       fetchWeatherData(position.coords.latitude, position.coords.longitude);
-  //     },
-  //     (err) => {
-  //       console.warn("Geo error", err);
-  //       setloading(false);
-  //     }
-  //   );
-  // }, []);
+  useEffect(() => {
+    setloading(true);
+
+    navigator.geolocation.getCurrentPosition((position) => {
+      fetchWeatherData(position.coords.latitude, position.coords.longitude);
+    });
+  }, []);
 
   return {
     weather,
