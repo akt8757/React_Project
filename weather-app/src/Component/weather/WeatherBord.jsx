@@ -1,15 +1,25 @@
 import React, { useContext } from "react";
+import { Flex, Spin } from "antd";
 import Favorit from "./Favorit";
 import WeatherHead from "./WeatherHead";
 import WeatherDetail from "./WeatherDetail";
 import { weatherContext } from "../../Context";
+import { CloseOutlined } from "@ant-design/icons";
 
 export default function WeatherBord() {
   const { WeatherData } = useContext(weatherContext);
-  const { weather } = WeatherData;
+  const { weather, loading } = WeatherData;
 
+  const antIcon = (
+    <CloseOutlined style={{ fontSize: 110, color: "#00B96B" }} spin />
+  );
   return (
     <div>
+      <Flex align="center" gap="middle">
+        <Spin indicator={antIcon} fullscreen={true} spinning={loading}>
+          content
+        </Spin>
+      </Flex>
       <main>
         <section>
           <div className="Container">
