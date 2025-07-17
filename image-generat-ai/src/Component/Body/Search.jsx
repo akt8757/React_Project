@@ -2,17 +2,15 @@ import React, { useContext, useEffect, useState } from "react";
 import { apiImageProvider } from "../../assets/Provider";
 
 export default function Search() {
-  const [value, setValue] = useState("");
-  // const [onSubmit, setOnSubmit] = useState("");
-  const [isAdvance, setIsAdvance] = useState({
-    search: "",
-    model: "",
-    height: "1024",
-    width: "1024",
-  });
-  const [isAdvanceChange, setIsadvanceChange] = useState();
   const { apiData } = useContext(apiImageProvider);
   const { fetchData, isModel } = apiData;
+  const [isAdvance, setIsAdvance] = useState({
+    search: "",
+    model: "flux",
+    height: "1024",
+    width: "1024",
+    image: "1",
+  });
 
   const handleAdvanceSetting = (e) => {
     setIsAdvance({
@@ -50,10 +48,8 @@ export default function Search() {
     }
   };
 
-  console.log("get input value", isAdvance);
-
   const handleSubmit = () => {
-    const { height, model, width, search } = isAdvance;
+    const { height, model, width, search, image } = isAdvance;
     if (search === "") {
       alert("REQUARD");
     } else if (model === "") {
@@ -63,7 +59,8 @@ export default function Search() {
     } else if (height === "") {
       alert("REQUARD");
     } else {
-      fetchData(search, width, height, model);
+      fetchData(search, width, height, model, image);
+      console.log("selected value", image);
     }
 
     //
@@ -81,9 +78,9 @@ export default function Search() {
               viewBox="0 0 24 24"
             >
               <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               ></path>
             </svg>
@@ -110,7 +107,6 @@ export default function Search() {
           </button>
         </div>
       </div>
-
       <div className="border border-zinc-700/70 mb-6 rounded-lg p-4">
         <div className="flex items-center justify-between mb-4">
           <h4 className="font-medium">Advanced Settings</h4>
@@ -119,25 +115,20 @@ export default function Search() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
             <label
-              for="model"
+              htmlFor="model"
               className="block text-sm font-medium text-zinc-700 mb-1"
             >
               Model
             </label>
             <select
               onChange={handleAdvanceSetting}
-              name="model"
               value={isAdvance.model}
+              name="model"
               id="model"
               className="w-full px-3 py-2 bg-zinc-900/10 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             >
               {isModel.map((item) => (
-                <option
-                  key={item}
-                  className="bg-zinc-900"
-                  value={item}
-                  selected
-                >
+                <option key={item} className="bg-zinc-900" value={item}>
                   {item}
                 </option>
               ))}
@@ -146,7 +137,7 @@ export default function Search() {
 
           <div>
             <label
-              for="seed"
+              htmlFor="seed"
               className="block text-sm font-medium text-zinc-700 mb-1"
             >
               Seed (for reproducible results)
@@ -154,7 +145,7 @@ export default function Search() {
             <input
               type="number"
               id="seed"
-              disabled="true"
+              disabled={true}
               className="w-full bg-zinc-900/10 px-3 py-2 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
               placeholder="Random"
             />
@@ -162,7 +153,7 @@ export default function Search() {
 
           <div>
             <label
-              for="width"
+              htmlFor="width"
               className="block text-sm font-medium text-zinc-700 mb-1"
             >
               Width
@@ -179,7 +170,7 @@ export default function Search() {
 
           <div>
             <label
-              for="height"
+              htmlFor="height"
               className="block text-sm font-medium text-zinc-700 mb-1"
             >
               Height
@@ -193,7 +184,34 @@ export default function Search() {
               className="w-full bg-zinc-900/10 px-3 py-2 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
             />
           </div>
-
+          <div>
+            <label
+              htmlFor="model"
+              className="block text-sm font-medium text-zinc-700 mb-1"
+            >
+              Select how many images you want to generate
+            </label>
+            <select
+              onChange={handleAdvanceSetting}
+              value={isAdvance.image}
+              name="image"
+              id="image"
+              className="w-full px-3 py-2 bg-zinc-900/10 border border-zinc-700/70 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            >
+              <option className="bg-zinc-900" value="4">
+                Image 1
+              </option>
+              <option className="bg-zinc-900" value="3">
+                Image 3
+              </option>
+              <option className="bg-zinc-900" value="5">
+                Image 5
+              </option>
+              <option className="bg-zinc-900" value="10">
+                Image 10
+              </option>
+            </select>
+          </div>
           <div>
             <label className="block text-sm font-medium text-zinc-700 mb-1">
               Aspect Ratio Presets
@@ -225,6 +243,37 @@ export default function Search() {
               </button>
             </div>
           </div>
+          {/* <div>
+            <label className="block text-sm font-medium text-zinc-700 mb-1">
+              Select how many images you want to generate
+            </label>
+            <div className="flex flex-wrap gap-2">
+              <button
+                onClick={() => handleSetRatio("1:1")}
+                className="bg-zinc-900/10 border border-zinc-700/70  rounded-lg px-3 py-2 text-sm  hover:bg-zinc-800  transition-colors"
+              >
+                Image 1
+              </button>
+              <button
+                onClick={() => handleSetRatio("1:1")}
+                className="bg-zinc-900/10 border border-zinc-700/70  rounded-lg px-3 py-2 text-sm  hover:bg-zinc-800  transition-colors"
+              >
+                Image 3
+              </button>
+              <button
+                onClick={() => handleSetRatio("1:1")}
+                className="bg-zinc-900/10 border border-zinc-700/70  rounded-lg px-3 py-2 text-sm  hover:bg-zinc-800  transition-colors"
+              >
+                Image 5
+              </button>
+              <button
+                onClick={() => handleSetRatio("1:1")}
+                className="bg-zinc-900/10 border border-zinc-700/70  rounded-lg px-3 py-2 text-sm  hover:bg-zinc-800  transition-colors"
+              >
+                Image 10
+              </button>
+            </div>
+          </div> */}
         </div>
       </div>
     </div>
