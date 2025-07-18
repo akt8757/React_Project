@@ -10,11 +10,15 @@ const useDownload = () => {
       const response = await fetch(imageUrl);
       const getBlob = await response.blob();
 
+      // this code only fore naming on image
+      const getSeed = new URL(imageUrl);
+      const seed = getSeed.searchParams.get("seed");
+
       // image  downloading logic
       const blobUrl = URL.createObjectURL(getBlob);
       const a = document.createElement("a");
       a.href = blobUrl;
-      a.download = `image-${Date.now()}.jpg`;
+      a.download = `image-${seed}.jpg`;
       a.click();
       URL.revokeObjectURL(blobUrl);
 
