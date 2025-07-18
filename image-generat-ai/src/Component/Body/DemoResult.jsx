@@ -5,9 +5,10 @@ import image3 from "../../assets/Images/ai-image-3.jpeg";
 import image4 from "../../assets/Images/ai-image-4.jpeg";
 import image5 from "../../assets/Images/ai-image-5.jpeg";
 import image6 from "../../assets/Images/ai-image-6.jpeg";
+import asraful from "../../assets/Images/asraful.jpg";
 import { Image } from "antd";
 export default function DemoResult() {
-  const imagess = [image1, image2, image3, image4, image5, image6];
+  const imagess = [asraful, image1, image2, image3, image4, image5, image6];
   console.log("data", imagess);
   return (
     <div>
