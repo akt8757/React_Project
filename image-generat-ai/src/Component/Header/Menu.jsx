@@ -1,12 +1,13 @@
 import React from "react";
 import logo from "../../assets/Images//logo.svg";
+import asraful from "../../assets/Images/asraful.jpg";
 
 export default function Menu({ changeRoute, changeClass }) {
   return (
     <div>
       <header className="flex items-center mb-12 justify-between">
         <div className="flex items-center">
-          <img src={logo} className="h-10" />
+          <img src={asraful} className="w-20 h-20 rounded-full object-cover" />
         </div>
         <ul className="ml-4 text-sm text-zinc-400 flex gap-8">
           <a

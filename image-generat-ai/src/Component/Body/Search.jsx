@@ -65,7 +65,9 @@ export default function Search() {
 
     //
   };
-
+  const handleEnter = (e) => {
+    console.log(e);
+  };
   return (
     <div>
       <div className="relative mb-8 rounded-full overflow-hidden border border-zinc-700 bg-zinc-900/10 backdrop-blur-sm">
@@ -86,6 +88,7 @@ export default function Search() {
             </svg>
           </div>
           <input
+            onKeyDown={handleEnter}
             onChange={handleAdvanceSetting}
             name="search"
             value={isAdvance.search}
