@@ -1,7 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { apiImageProvider } from "../../assets/Provider";
+import { Button, message, Space } from "antd";
 
 export default function Search() {
+  const [messageApi, contextHolder] = message.useMessage();
   const { apiData } = useContext(apiImageProvider);
   const { fetchData, isModel } = apiData;
   const [isAdvance, setIsAdvance] = useState({
@@ -11,7 +13,7 @@ export default function Search() {
     width: "1024",
     image: "1",
   });
-
+  const { height, model, width, search, image } = isAdvance;
   const handleAdvanceSetting = (e) => {
     setIsAdvance({
       ...isAdvance,
@@ -49,27 +51,46 @@ export default function Search() {
   };
 
   const handleSubmit = () => {
-    const { height, model, width, search, image } = isAdvance;
     if (search === "") {
-      alert("REQUARD");
+      messageApi.open({
+        type: "warning",
+        content: "Must need a Prompt",
+      });
     } else if (model === "") {
-      alert("REQUARD");
+      messageApi.open({
+        type: "warning",
+        content: "Must sellect a Model",
+      });
     } else if (width === "") {
-      alert("REQUARD");
+      messageApi.open({
+        type: "warning",
+        content: "Must sellect image width",
+      });
     } else if (height === "") {
-      alert("REQUARD");
+      messageApi.open({
+        type: "warning",
+        content: "Must sellect image height",
+      });
     } else {
       fetchData(search, width, height, model, image);
-      console.log("selected value", image);
     }
-
-    //
   };
   const handleEnter = (e) => {
-    console.log(e);
+    if (e.key === "Enter") {
+      if (search === "") {
+        messageApi.open({
+          type: "warning",
+          content: "Must need a Prompt",
+        });
+      } else {
+        fetchData(search, width, height, model, image);
+      }
+    }
   };
+
   return (
     <div>
+      {contextHolder}
       <div className="relative mb-8 rounded-full overflow-hidden border border-zinc-700 bg-zinc-900/10 backdrop-blur-sm">
         <div className="flex items-center">
           <div className="pl-5 pr-2">

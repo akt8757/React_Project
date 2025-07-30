@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { apiImageProvider } from "../../assets/Provider";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Flex, Spin } from "antd";
-import useDownload from "../../Hooks/useDownload";
+
 import { downloadImageContext } from "../../assets/Provider";
 import { FaCloudDownloadAlt } from "react-icons/fa";
 import { Image } from "antd";
@@ -10,15 +10,15 @@ import DemoResult from "./DemoResult";
 
 export default function Result() {
   const { apiData } = useContext(apiImageProvider);
-  const { getImage, error, loading } = apiData;
+  const { getImage, loading } = apiData;
   const { downLoadedImage } = useContext(downloadImageContext);
-  const { handleDownloadImage, isDownloadImage } = downLoadedImage;
+  const { handleDownloadImage } = downLoadedImage;
 
   return (
     <div>
       <Flex align="center" gap="middle">
         <Spin
-          tip="Your image is genareting..."
+          tip="Get ready, Here comes Asraful’s creation!"
           fullscreen={true}
           spinning={loading}
           indicator={<LoadingOutlined style={{ fontSize: 100 }} spin />}

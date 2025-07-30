@@ -13,7 +13,7 @@ const useFetchApi = () => {
     for (let i = 0; i < image; i++) {
       setLoading(true);
       const seed = Math.floor(100000 + Math.random() * 900000);
-      const apiCall = `https://image.pollinations.ai/prompt/${prompt}?width=${width}&height=${height}&seed=${seed}&model=${model}&nologo=true`;
+      const apiCall = `https://image.pollinations.ai/prompt/${prompt}?width=${width}&height=${height}&seed=${seed}&model=${model}&nologo=true&enhance=true`;
       try {
         const response = await fetch(apiCall);
         if (!response.ok) {
