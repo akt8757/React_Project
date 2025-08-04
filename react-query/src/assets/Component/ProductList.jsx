@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-export default function ProductList({ igetIdHandeler }) {
+export default function ProductList({ getIdHandeler }) {
   const getProductData = async ({ queryKey }) => {
     const products = await axios.get(`http://localhost:3001/${queryKey[0]}`);
     return products.data;
   };
+
   getProductData();
   const { error, data, isLoading } = useQuery({
     queryKey: ["products"],
@@ -21,7 +22,7 @@ export default function ProductList({ igetIdHandeler }) {
           {data &&
             data.map((item) => (
               <li
-                onClick={() => igetIdHandeler(item.id)}
+                onClick={() => getIdHandeler(item.id)}
                 className=" flex flex-col border border-sky-200 rounded-sm m-2"
               >
                 <h2 className="text-xl my-2 text-center">{item.title}</h2>
