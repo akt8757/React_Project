@@ -7,8 +7,10 @@ import App from "./App.jsx";
 
 const queryClient = new QueryClient();
 createRoot(document.getElementById("root")).render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-    <ReactQueryDevtools initialIsOpen={false} />
-  </QueryClientProvider>
+  <StrictMode>
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </StrictMode>
 );

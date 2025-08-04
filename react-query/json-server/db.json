@@ -255,38 +255,6 @@
       "price": 1000,
       "rating": 5,
       "thumbnail": "https://cdn.pixabay.com/photo/2018/05/18/12/14/wine-3411055_640.jpg"
-    },
-    {
-      "id": "1501ddb8-33e9-45b1-a7a9-b16a78b35c7b",
-      "title": "bbbbaa",
-      "description": "nnnnn",
-      "price": 3,
-      "rating": 5,
-      "thumbnail": "https://cdn.pixabay.com/photo/2021/08/12/21/52/stamp-6541792_640.jpg"
-    },
-    {
-      "id": "c0550154-58e4-496b-8c14-e4c4cf730651",
-      "title": "bbbbaa",
-      "description": "nnnnn",
-      "price": 3,
-      "rating": 5,
-      "thumbnail": "https://cdn.pixabay.com/photo/2021/12/20/00/48/vintage-6882110_640.png"
-    },
-    {
-      "id": "aecf1713-a230-47dc-83fc-57959962eddd",
-      "title": "gfg",
-      "description": "fgfg",
-      "price": 3,
-      "rating": 5,
-      "thumbnail": "https://cdn.pixabay.com/photo/2020/10/05/03/19/chivas-regal-5628063_640.jpg"
-    },
-    {
-      "id": "77dbc929-c4ed-43a8-a6d0-507de095f329",
-      "title": "test",
-      "description": "test desc",
-      "price": 3,
-      "rating": 5,
-      "thumbnail": "https://cdn.pixabay.com/photo/2024/05/21/07/08/bag-8777185_640.jpg"
     }
   ]
 }
