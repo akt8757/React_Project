@@ -6,7 +6,6 @@ export default function ProductDetail({ id }) {
     const product = await axios.get(
       `http://localhost:3001/${queryKey[0]}/${queryKey[1]}`
     );
-
     return product.data;
   };
 
