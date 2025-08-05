@@ -100,7 +100,7 @@ export default function AddProduct() {
         onClick={handleSubmit}
         className="rounded-2xl bg-amber-700 border py-2 px-8 text-amber-50"
       >
-        Submit
+        Submit Data
       </button>
     </div>
   );
