@@ -2,35 +2,11 @@
   "products": [
     {
       "id": "1",
-      "title": "iPhone 9",
-      "description": "An apple mobile which is nothing like apple",
-      "price": 549,
-      "rating": 4.69,
-      "thumbnail": "https://cdn.pixabay.com/photo/2015/01/20/13/13/samsung-605439_640.jpg"
-    },
-    {
-      "id": "2",
-      "title": "iPhone X",
-      "description": "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
-      "price": 899,
-      "rating": 4.44,
-      "thumbnail": "https://cdn.pixabay.com/photo/2014/08/05/10/30/iphone-410324_640.jpg"
-    },
-    {
-      "id": "3",
-      "title": "Samsung Universe 9",
-      "description": "Samsung's new variant which goes beyond Galaxy to the Universe",
-      "price": 1249,
+      "title": "Huawei P30",
+      "description": "Huawei’s re-badged P30 Pro New Edition was officially unveiled yesterday in Germany and now the device has made its way to the UK.",
+      "price": 499,
       "rating": 4.09,
-      "thumbnail": "https://cdn.pixabay.com/photo/2015/01/09/02/45/laptop-593673_640.jpg"
-    },
-    {
-      "id": "4",
-      "title": "OPPOF19",
-      "description": "OPPO F19 is officially announced on April 2021.",
-      "price": 280,
-      "rating": 4.3,
-      "thumbnail": "https://cdn.pixabay.com/photo/2016/09/02/13/48/tv-1639240_640.jpg"
+      "thumbnail": "https://cdn.pixabay.com/photo/2016/11/19/16/01/audio-1840073_640.jpg"
     },
     {
       "id": "5",
@@ -39,14 +15,6 @@
       "price": 499,
       "rating": 4.09,
       "thumbnail": "https://cdn.pixabay.com/photo/2016/11/19/16/01/audio-1840073_640.jpg"
-    },
-    {
-      "id": "6",
-      "title": "MacBook Pro",
-      "description": "MacBook Pro 2021 with mini-LED display may launch between September, November",
-      "price": 1749,
-      "rating": 4.57,
-      "thumbnail": "https://cdn.pixabay.com/photo/2016/11/21/16/27/laptop-1846277_640.jpg"
     },
     {
       "id": "7",
@@ -241,20 +209,20 @@
       "thumbnail": "https://cdn.pixabay.com/photo/2024/05/20/14/28/dhanno-8775420_640.jpg"
     },
     {
-      "id": "13dfb563-bc9a-4027-8100-fea2348e51bd",
-      "title": "Bed",
-      "description": "A superb Cozy Bed",
-      "price": 2000,
-      "rating": 5,
-      "thumbnail": "https://cdn.pixabay.com/photo/2015/06/24/19/07/knife-820544_640.jpg"
+      "id": "ad41c24d-7ac1-4f57-9947-8e902284d5f2",
+      "title": "",
+      "description": "",
+      "price": "",
+      "rating": "",
+      "thumbnail": "dcdcdcd"
     },
     {
-      "id": "3dbb3096-f2ef-4815-8653-d6c4a2965dbe",
-      "title": "Bed",
-      "description": "Cozy Bed",
-      "price": 1000,
-      "rating": 5,
-      "thumbnail": "https://cdn.pixabay.com/photo/2018/05/18/12/14/wine-3411055_640.jpg"
+      "id": "ae084416-c3fe-4d22-9362-0cd445561f98",
+      "title": "",
+      "description": "",
+      "price": "",
+      "rating": "",
+      "thumbnail": ""
     }
   ]
 }
