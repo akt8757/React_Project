@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 export default function ProductList({ getIdHandeler }) {
   const getProductData = async ({ queryKey }) => {
@@ -13,6 +13,19 @@ export default function ProductList({ getIdHandeler }) {
     queryFn: getProductData,
   });
 
+  const queryClient = useQueryClient();
+  const mutation = useMutation({
+    mutationFn: (id) => axios.delete(`http://localhost:3001/products/${id}`),
+    onSuccess: () => {
+      queryClient.invalidateQueries(["products"]);
+    },
+  });
+
+  const handleDelete = (id) => {
+    console.log(id);
+    mutation.mutate(id);
+  };
+
   if (isLoading) return <h1>Loading...</h1>;
   if (error) return <h1>error ocard</h1>;
   return (
@@ -23,9 +36,14 @@ export default function ProductList({ getIdHandeler }) {
             data.map((item) => (
               <li
                 key={item.id}
-                onClick={() => getIdHandeler(item.id)}
                 className="flex flex-col border border-sky-200 rounded-sm m-2"
               >
+                <button
+                  onClick={() => getIdHandeler(item.id)}
+                  className="text-center bg-amber-800 border-2 border-r-2 py-2 px-7"
+                >
+                  Show Product
+                </button>
                 <h2 className="text-xl my-2 text-center">{item.title}</h2>
                 {item.thumbnail && (
                   <img
@@ -34,6 +52,12 @@ export default function ProductList({ getIdHandeler }) {
                     alt="Product"
                   />
                 )}
+                <button
+                  onClick={() => handleDelete(item.id)}
+                  className="text-center bg-amber-800 border-2 border-r-2 py-2 px-7"
+                >
+                  Delete
+                </button>
               </li>
             ))}
         </ul>

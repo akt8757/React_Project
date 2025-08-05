@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ProductDetail from "./assets/Component/productDetail";
+import ProductDetail from "./assets/Component/ProductDetail";
 import ProductList from "./assets/Component/ProductList";
 import AddProduct from "./assets/Component/AddProduct";
 
