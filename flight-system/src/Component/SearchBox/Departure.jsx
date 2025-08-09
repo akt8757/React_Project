@@ -1,0 +1,57 @@
+import React, { useState } from "react";
+import { IoLocationOutline } from "react-icons/io5";
+import DestinationPopup from "../FlightPopup/DestinationPopup";
+import { useContext } from "react";
+import { FlightContext } from "../../Provider/provider";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+export default function Departure() {
+  const { airport, setAirport } = useContext(FlightContext);
+  const Airport = airport[0];
+  const [departurePopup, setDeparturePopup] = useState(false);
+  const [activePopup, setActivePopup] = useState(null);
+
+  return (
+    <Popover
+      open={departurePopup}
+      onOpenChange={(open) => {
+        setDeparturePopup(open);
+        if (open) setActivePopup("departure");
+      }}
+    >
+      <div>
+        <PopoverTrigger asChild>
+          <div className="px-2 py-2 border-green-400 border rounded-2xl">
+            <div
+              onClick={() => setDeparturePopup(!departurePopup)}
+              className="cursor-pointer select-none"
+            >
+              <div className="flex gap-1 items-center text-green-500">
+                <IoLocationOutline />
+                <p className="text-gray-400">Form</p>
+              </div>
+              <div>
+                <p className="text-gray-700 font-medium my-1">
+                  {Airport.city_name}
+                </p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-[12px]">
+                  {Airport.airport_name}
+                </p>
+              </div>
+            </div>
+          </div>
+        </PopoverTrigger>
+
+        <PopoverContent className="bg-transperent border-none shadow-none w-64 ">
+          <DestinationPopup activePopup={activePopup} />
+        </PopoverContent>
+      </div>
+    </Popover>
+  );
+}
