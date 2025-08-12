@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { current } from "@reduxjs/toolkit";
-import dayjs from "dayjs";
+
 const initialState = {
   trip_type: "ROUND_TRIP",
   fare_type: "NORMAL",
@@ -119,34 +118,36 @@ const flightSearchSlice = createSlice({
       //     console.log("match");
       //   }
 
-      const found = state.trips.forEach(
-        (trip) => trip.departure_date === trip.departure_airport
-      );
+      // const found = state.trips.forEach(
+      //   (trip) => trip.departure_date === trip.departure_airport
+      // );
 
-      console.log(found);
-      if (found) {
-        console.log(found);
-      }
+      // console.log(found);
+      // if (found) {
+      //   console.log(found);
+      // }
 
       //   round trip logic
-      if (arrival === "arrival") {
-        state.trips[0].arrival_airport = item.airport_code;
-        state.trips[0].arrival_airport_name = item.airport_name;
-        state.trips[0].arrival_city_name = item.city_name;
-        state.trips[0].arrival_country_name = item.country_name;
-        state.trips[1].departure_airport = item.airport_code;
-        state.trips[1].departure_airport_name = item.airport_name;
-        state.trips[1].departure_city_name = item.city_name;
-        state.trips[1].departure_country_name = item.country_name;
-      } else if (departure === "departure") {
-        state.trips[0].departure_airport = item.airport_code;
-        state.trips[0].departure_airport_name = item.airport_name;
-        state.trips[0].departure_city_name = item.city_name;
-        state.trips[0].departure_country_name = item.country_name;
-        state.trips[1].arrival_airport = item.airport_code;
-        state.trips[1].arrival_airport_name = item.airport_name;
-        state.trips[1].arrival_city_name = item.city_name;
-        state.trips[1].arrival_country_name = item.country_name;
+      if (selectedTrip === "round-trip") {
+        if (arrival === "arrival") {
+          state.trips[0].arrival_airport = item.airport_code;
+          state.trips[0].arrival_airport_name = item.airport_name;
+          state.trips[0].arrival_city_name = item.city_name;
+          state.trips[0].arrival_country_name = item.country_name;
+          state.trips[1].departure_airport = item.airport_code;
+          state.trips[1].departure_airport_name = item.airport_name;
+          state.trips[1].departure_city_name = item.city_name;
+          state.trips[1].departure_country_name = item.country_name;
+        } else if (departure === "departure") {
+          state.trips[0].departure_airport = item.airport_code;
+          state.trips[0].departure_airport_name = item.airport_name;
+          state.trips[0].departure_city_name = item.city_name;
+          state.trips[0].departure_country_name = item.country_name;
+          state.trips[1].arrival_airport = item.airport_code;
+          state.trips[1].arrival_airport_name = item.airport_name;
+          state.trips[1].arrival_city_name = item.city_name;
+          state.trips[1].arrival_country_name = item.country_name;
+        }
       }
 
       //   one way & multi city trip consider a single flight object in one arry
@@ -161,6 +162,7 @@ const flightSearchSlice = createSlice({
         state.trips[index].departure_city_name = item.city_name;
         state.trips[index].departure_country_name = item.country_name;
       }
+      console.log("index", departure);
     },
   },
 });

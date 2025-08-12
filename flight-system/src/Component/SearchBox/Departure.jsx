@@ -9,16 +9,16 @@ import {
 } from "@/components/ui/popover";
 
 export default function Departure({ departure, index }) {
-  const [departurePopup, setDeparturePopup] = useState(false);
-  const [activePopup, setActivePopup] = useState(null);
+  // const [departurePopup, setDeparturePopup] = useState(false);
+  // const [activePopup, setActivePopup] = useState(null);
 
   return (
     <Popover
-      open={departurePopup}
-      onOpenChange={(open) => {
-        setDeparturePopup(open);
-        if (open) setActivePopup("departure");
-      }}
+    // open={departurePopup}
+    // onOpenChange={(open) => {
+    //   setDeparturePopup(open);
+    //   if (open) setActivePopup("departure");
+    // }}
     >
       <div>
         <PopoverTrigger asChild>
@@ -47,7 +47,7 @@ export default function Departure({ departure, index }) {
 
         <PopoverContent className="bg-transperent border-none shadow-none w-64 ">
           <DestinationPopup
-            activePopup={activePopup}
+            // activePopup={activePopup}
             index={index}
             departure="departure"
           />
