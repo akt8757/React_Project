@@ -1,0 +1,19 @@
+{
+  "agency_id": "43",
+  "trip_type": "ONE_WAY",
+  "fare_type": "NORMAL",
+  "cabin_class": "ECONOMY",
+  "trips": [
+    {
+      "departure_date": "2025-08-15",
+      "departure_airport": "DAC",
+      "arrival_airport": "CGP"
+    }
+  ],
+  "passengers": {
+    "adult": 1,
+    "child": 0,
+    "kid": 0,
+    "infant": 0
+  }
+}
