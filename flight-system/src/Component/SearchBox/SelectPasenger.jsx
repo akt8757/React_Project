@@ -13,7 +13,7 @@ export default function SelectPasenger() {
   const passengers = useSelector((state) => state.flightSearch.passengers);
   const travelClass = useSelector((state) => state.flightSearch.cabin_class);
   const state = useSelector((state) => state.flightSearch.trips);
-  console.log("redux", state);
+  // console.log("redux", state);
 
   const { changePopup, setChangePopup } = useContext(FlightContext);
 
