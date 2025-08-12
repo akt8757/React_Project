@@ -4,6 +4,7 @@ const initialState = {
   trip_type: "ROUND_TRIP",
   fare_type: "NORMAL",
   cabin_class: "ECONOMY",
+  flag: false,
   trips: [
     {
       departure_date: "",
@@ -111,58 +112,75 @@ const flightSearchSlice = createSlice({
         state.trips[1].departure_date = getDateTwo;
       }
 
-      //   let match =
-      //     state.trips[index].arrival_airport === item.airport_code ||
-      //     state.trips[index].departure_airport === item.airport_code;
-      //   if (item.airport_code === match) {
-      //     console.log("match");
-      //   }
+      let getData = null;
 
-      // const found = state.trips.forEach(
-      //   (trip) => trip.departure_date === trip.departure_airport
-      // );
+      if (arrival === "arrival") {
+        getData = state.trips[index].departure_airport === item.airport_code;
+      } else if (departure === "departure") {
+        getData = state.trips[index].arrival_airport === item.airport_code;
+      }
 
-      // console.log(found);
-      // if (found) {
-      //   console.log(found);
-      // }
+      console.log("asraful", getData);
 
-      //   round trip logic
-      if (selectedTrip === "round-trip") {
-        if (arrival === "arrival") {
-          state.trips[0].arrival_airport = item.airport_code;
-          state.trips[0].arrival_airport_name = item.airport_name;
-          state.trips[0].arrival_city_name = item.city_name;
-          state.trips[0].arrival_country_name = item.country_name;
-          state.trips[1].departure_airport = item.airport_code;
-          state.trips[1].departure_airport_name = item.airport_name;
-          state.trips[1].departure_city_name = item.city_name;
-          state.trips[1].departure_country_name = item.country_name;
-        } else if (departure === "departure") {
-          state.trips[0].departure_airport = item.airport_code;
-          state.trips[0].departure_airport_name = item.airport_name;
-          state.trips[0].departure_city_name = item.city_name;
-          state.trips[0].departure_country_name = item.country_name;
-          state.trips[1].arrival_airport = item.airport_code;
-          state.trips[1].arrival_airport_name = item.airport_name;
-          state.trips[1].arrival_city_name = item.city_name;
-          state.trips[1].arrival_country_name = item.country_name;
+      if (getData) {
+        state.flag = getData;
+      } else {
+        if (selectedTrip === "round-trip") {
+          if (arrival === "arrival") {
+            state.trips[0].arrival_airport = item.airport_code;
+            state.trips[0].arrival_airport_name = item.airport_name;
+            state.trips[0].arrival_city_name = item.city_name;
+            state.trips[0].arrival_country_name = item.country_name;
+            state.trips[1].departure_airport = item.airport_code;
+            state.trips[1].departure_airport_name = item.airport_name;
+            state.trips[1].departure_city_name = item.city_name;
+            state.trips[1].departure_country_name = item.country_name;
+          } else if (departure === "departure") {
+            state.trips[0].departure_airport = item.airport_code;
+            state.trips[0].departure_airport_name = item.airport_name;
+            state.trips[0].departure_city_name = item.city_name;
+            state.trips[0].departure_country_name = item.country_name;
+            state.trips[1].arrival_airport = item.airport_code;
+            state.trips[1].arrival_airport_name = item.airport_name;
+            state.trips[1].arrival_city_name = item.city_name;
+            state.trips[1].arrival_country_name = item.country_name;
+          }
+        } else {
+          if (arrival === "arrival") {
+            state.trips[index].arrival_airport = item.airport_code;
+            state.trips[index].arrival_airport_name = item.airport_name;
+            state.trips[index].arrival_city_name = item.city_name;
+            state.trips[index].arrival_country_name = item.country_name;
+          } else if (departure === "departure") {
+            state.trips[index].departure_airport = item.airport_code;
+            state.trips[index].departure_airport_name = item.airport_name;
+            state.trips[index].departure_city_name = item.city_name;
+            state.trips[index].departure_country_name = item.country_name;
+          }
         }
       }
 
-      //   one way & multi city trip consider a single flight object in one arry
-      if (arrival === "arrival") {
-        state.trips[index].arrival_airport = item.airport_code;
-        state.trips[index].arrival_airport_name = item.airport_name;
-        state.trips[index].arrival_city_name = item.city_name;
-        state.trips[index].arrival_country_name = item.country_name;
-      } else if (departure === "departure") {
-        state.trips[index].departure_airport = item.airport_code;
-        state.trips[index].departure_airport_name = item.airport_name;
-        state.trips[index].departure_city_name = item.city_name;
-        state.trips[index].departure_country_name = item.country_name;
-      }
-      console.log("index", departure);
+      //   console.log("index", departure);
+    },
+
+    setSwapObject: (state, action) => {
+      const index = action.payload;
+      let temp1 = state.trips[index].arrival_airport;
+      let temp2 = state.trips[index].arrival_airport_name;
+      let temp3 = state.trips[index].arrival_city_name;
+      let temp4 = state.trips[index].arrival_country_name;
+      state.trips[index].arrival_airport = state.trips[index].departure_airport;
+      state.trips[index].arrival_airport_name =
+        state.trips[index].departure_airport_name;
+      state.trips[index].arrival_city_name =
+        state.trips[index].departure_city_name;
+      state.trips[index].arrival_country_name =
+        state.trips[index].departure_country_name;
+
+      state.trips[index].departure_airport = temp1;
+      state.trips[index].departure_airport_name = temp2;
+      state.trips[index].departure_city_name = temp3;
+      state.trips[index].departure_country_name = temp4;
     },
   },
 });
@@ -172,6 +190,7 @@ export const {
   setAddCity,
   setRemoveCity,
   setAirPortData,
+  setSwapObject,
 } = flightSearchSlice.actions;
 export default flightSearchSlice.reducer;
 

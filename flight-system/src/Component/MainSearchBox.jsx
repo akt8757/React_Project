@@ -9,6 +9,7 @@ import { TripContext } from "../Provider/provider";
 import { IoRemoveCircleOutline } from "react-icons/io5";
 import { Button } from "@/components/ui/button";
 import { IoAddCircle } from "react-icons/io5";
+import { setSwapObject } from "../assets/redux/feature/flightSearch/SearchSlice";
 import {
   setAddCity,
   setRemoveCity,
@@ -29,7 +30,10 @@ export default function MainSearchBox() {
   const handleRemoveCity = (index) => {
     dispatch(setRemoveCity(index));
   };
-
+  //swap airport
+  const handleSwap = (index) => {
+    dispatch(setSwapObject(index));
+  };
   let logiCalTrip = null;
 
   if (selectedTrip === "on-way" || selectedTrip === "round-trip") {
@@ -45,7 +49,10 @@ export default function MainSearchBox() {
                 <Arivel arrival={flight} index={index} />
               </div>
               <div className="absolute  left-0 right-0 top-6.5 pointer-events-none">
-                <div className="bg-green-600  text-white border rounded-full w-9 h-9 flex items-center justify-center m-auto pointer-events-auto">
+                <div
+                  onClick={() => handleSwap(index)}
+                  className="bg-green-600  text-white border rounded-full w-9 h-9 flex items-center justify-center m-auto pointer-events-auto"
+                >
                   <AiOutlineSwap />
                 </div>
               </div>
@@ -67,7 +74,10 @@ export default function MainSearchBox() {
                 <Arivel arrival={flight} index={index} />
               </div>
               <div className="absolute  left-0 right-0 top-6.5 pointer-events-none">
-                <div className="bg-green-600  text-white border rounded-full w-9 h-9 flex items-center justify-center m-auto pointer-events-auto">
+                <div
+                  onClick={() => handleSwap(index)}
+                  className="bg-green-600  text-white border rounded-full w-9 h-9 flex items-center justify-center m-auto pointer-events-auto"
+                >
                   <AiOutlineSwap />
                 </div>
               </div>
