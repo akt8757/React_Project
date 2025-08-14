@@ -7,10 +7,18 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { setFlightDestination } from "../../assets/redux/feature/flightSearch/SearchSlice";
+import { useDispatch } from "react-redux";
 
 export default function Departure({ departure, index }) {
   // const [departurePopup, setDeparturePopup] = useState(false);
   // const [activePopup, setActivePopup] = useState(null);
+  const dispatch = useDispatch();
+
+  const handleDeparture = () => {
+    const destination = "departure";
+    dispatch(setFlightDestination(destination));
+  };
 
   return (
     <Popover
@@ -20,7 +28,7 @@ export default function Departure({ departure, index }) {
     //   if (open) setActivePopup("departure");
     // }}
     >
-      <div>
+      <div onClick={handleDeparture}>
         <PopoverTrigger asChild>
           <div className="px-2 py-2 border-green-400 border rounded-2xl">
             <div
@@ -49,7 +57,7 @@ export default function Departure({ departure, index }) {
           <DestinationPopup
             // activePopup={activePopup}
             index={index}
-            departure="departure"
+            destination="departure"
           />
         </PopoverContent>
       </div>

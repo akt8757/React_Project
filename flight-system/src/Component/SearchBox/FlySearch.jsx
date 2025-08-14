@@ -4,6 +4,7 @@ import { TripContext } from "../../Provider/provider";
 
 export default function FlySearch() {
   const selector = useSelector((state) => state.flightSearch);
+  const state = useSelector((state) => state.flightSearch);
   const { selectedTrip } = useContext(TripContext);
 
   // const data = selector.trips.map((item) => {

@@ -5,15 +5,13 @@ import { CiLocationOn } from "react-icons/ci";
 import { useContext } from "react";
 import { FlightContext } from "../../Provider/provider";
 import { useDispatch } from "react-redux";
-import { setAirPortData } from "../../assets/redux/feature/flightSearch/SearchSlice";
+import {
+  setAirPortData,
+  setFlightDestination,
+} from "../../assets/redux/feature/flightSearch/SearchSlice";
 import { TripContext } from "../../Provider/provider";
 
-export default function DestinationPopup({
-  activePopup,
-  index,
-  arrival,
-  departure,
-}) {
+export default function DestinationPopup({ activePopup, index, destination }) {
   const defaultAirport = [
     {
       airport_code: "DAC",
@@ -70,7 +68,8 @@ export default function DestinationPopup({
   const { selectedTrip } = useContext(TripContext);
   const dispatch = useDispatch();
   const handleAirportName = (item) => {
-    dispatch(setAirPortData({ index, item, arrival, departure, selectedTrip }));
+    dispatch(setAirPortData({ index, item }));
+    // dispatch(setFlightDestination(destination));
   };
 
   return (

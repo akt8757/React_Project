@@ -8,10 +8,18 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { setFlightDestination } from "../../assets/redux/feature/flightSearch/SearchSlice";
+import { useDispatch } from "react-redux";
 
 export default function Arivel({ arrival, index }) {
   // const { changePopup, setChangePopup } = useContext(FlightContext);
   const [arivelPopup, setArivelPopup] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleArrival = () => {
+    const destination = "arrival";
+    dispatch(setFlightDestination(destination));
+  };
 
   return (
     <Popover
@@ -20,7 +28,7 @@ export default function Arivel({ arrival, index }) {
     //   open ? setChangePopup("departure") : setChangePopup(false)
     // }
     >
-      <div>
+      <div onClick={handleArrival}>
         <PopoverTrigger asChild>
           <div
             onClick={() => setArivelPopup(!arivelPopup)}
@@ -44,7 +52,7 @@ export default function Arivel({ arrival, index }) {
         </PopoverTrigger>
 
         <PopoverContent className="bg-transperent border-none shadow-none">
-          <DestinationPopup index={index} arrival="arrival" />
+          <DestinationPopup index={index} destination="arrival" />
         </PopoverContent>
       </div>
     </Popover>
