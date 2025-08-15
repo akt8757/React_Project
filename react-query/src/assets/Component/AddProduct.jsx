@@ -27,13 +27,15 @@ export default function AddProduct() {
     },
   });
 
-  const handleSubmit = () => {
-    // e.preventDefault();
+  const handleSubmit = (e) => {
     console.log("submitting");
+    e.preventDefault();
+
     const newData = { ...state, id: crypto.randomUUID().toString() };
     mutation.mutate(newData);
   };
   const handleChange = (e) => {
+    e.preventDefault();
     const name = e.target.name;
     const value = e.target.value;
 
