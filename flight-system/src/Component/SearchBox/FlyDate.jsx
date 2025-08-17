@@ -9,7 +9,7 @@ import weekday from "dayjs/plugin/weekday";
 import localizedFormat from "dayjs/plugin/localizedFormat";
 import "dayjs/locale/en";
 import { useDispatch } from "react-redux";
-import { setAirPortData } from "../../assets/redux/feature/flightSearch/SearchSlice";
+import { setDate } from "../../assets/redux/feature/flightSearch/SearchSlice";
 dayjs.extend(weekday);
 dayjs.extend(localizedFormat);
 
@@ -35,7 +35,7 @@ export default function FlyDate({ index }) {
     }
 
     console.log("date", getDate);
-    dispatch(setAirPortData({ getdateOne, getDateTwo, getDate, index }));
+    dispatch(setDate({ getdateOne, getDateTwo, getDate, index }));
   };
 
   return (

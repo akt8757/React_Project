@@ -112,7 +112,7 @@ const flightSearchSlice = createSlice({
     },
 
     setAirPortData: (state, action) => {
-      const { index, item, getdateOne, getDateTwo, getDate } = action.payload;
+      const { index, item } = action.payload;
       console.log("city from child", item);
       if (state.selectedTrip === "on-way") {
         state.trip_type = "on-way";
@@ -120,13 +120,6 @@ const flightSearchSlice = createSlice({
         state.trip_type = "ROUND_TRIP";
       } else if (state.selectedTrip === "multi-city") {
         state.trip_type = "MULTI-CITY";
-      }
-
-      if (getDate) {
-        state.trips[index].departure_date = getDate;
-      } else if (getDateTwo && getdateOne) {
-        state.trips[0].departure_date = getdateOne;
-        state.trips[1].departure_date = getDateTwo;
       }
 
       let getData = null;
@@ -188,6 +181,16 @@ const flightSearchSlice = createSlice({
       //   console.log("index", selectedTrip);
     },
 
+    setDate: (state, action) => {
+      const { getdateOne, getDateTwo, getDate, index } = action.payload;
+      if (getDate) {
+        state.trips[index].departure_date = getDate;
+      } else if (getDateTwo && getdateOne) {
+        state.trips[0].departure_date = getdateOne;
+        state.trips[1].departure_date = getDateTwo;
+      }
+    },
+
     setSwapObject: (state, action) => {
       const index = action.payload;
       let temp1 = state.trips[index].departure_airport;
@@ -218,5 +221,6 @@ export const {
   setSwapObject,
   setTrip,
   setFlightDestination,
+  setDate,
 } = flightSearchSlice.actions;
 export default flightSearchSlice.reducer;

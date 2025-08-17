@@ -15,11 +15,11 @@ export default function FlySearch() {
   const roundTripOne = selector.trips[0];
   const roundTripTwo = selector.trips[1];
 
-  const handleSearch = () => {
+  const handleSearch = async () => {
     let redyForSearch;
     if (selectedTrip === "on-way") {
       redyForSearch = {
-        agency_id: "43",
+        agency_id: "1",
         trip_type: selector.trip_type,
         fare_type: "NORMAL",
         cabin_class: selector.cabin_class,
@@ -39,7 +39,7 @@ export default function FlySearch() {
       };
     } else if (selectedTrip === "multi-city") {
       redyForSearch = {
-        agency_id: "43",
+        agency_id: "1",
         trip_type: selector.trip_type,
         fare_type: "NORMAL",
         cabin_class: selector.cabin_class,
@@ -59,7 +59,7 @@ export default function FlySearch() {
       };
     } else if (selectedTrip === "round-trip") {
       redyForSearch = {
-        agency_id: "43",
+        agency_id: "1",
         trip_type: selector.trip_type,
         fare_type: "NORMAL",
         cabin_class: selector.cabin_class,
@@ -83,7 +83,24 @@ export default function FlySearch() {
         },
       };
     }
-    console.log("lisiting from search", redyForSearch);
+    // console.log("lisiting from search", redyForSearch);
+
+    const token = "4|xu7OkgIe9D9Y6G6PxR65lbodgXYlfFhAFESWSFpS75d6694e";
+    let response = await fetch(
+      "https://api.newtkt.com/api/v1/reservation/flight/search",
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(redyForSearch),
+        method: "POST",
+      }
+    );
+    response = await response.json();
+
+    console.log("result", response);
   };
 
   return (
@@ -97,3 +114,19 @@ export default function FlySearch() {
     </div>
   );
 }
+
+// const execute = async () => {
+//       const token = 1|wWOE83gTijU4wFS5dtHgCJM8rK1YGS7p7AWApc43f23ffaf8;
+//       const response = await fetch(
+//         "https://api.newtkt.com/api/v1/reservation/flight/search",
+//         {
+//           headers: {
+//             "Content-Type": "application/json",
+//             Accept: "application/json",
+//             Authorization: Bearer ${token},
+//           },
+//           body: JSON.stringify(requestJSON),
+//           method: "POST",
+//         }
+//       );
+//     };
