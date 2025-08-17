@@ -15,8 +15,8 @@ function App() {
     <ContextStore>
       <div>
         <Header />
-        <div className="px-[220px] mt-20">
-          <div className="shadow-lg bg-stone-50 pb-50 pt-2 ">
+        <div className="px-[200px] mt-20">
+          <div className="shadow-lg bg-stone-50 pb-100 pt-2 ">
             <ServicOption />
             <TripOption />
 
