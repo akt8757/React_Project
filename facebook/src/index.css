@@ -1,17 +1,13 @@
 /* ===== Components Layer ===== */
 @import "tailwindcss";
+
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap");
-
+@config "../tailwind.config.js";
 /* ===== Theme customization ===== */
-@theme {
-  /* container settings */
-  --container-center: true;
-  --container-padding: 1rem;
 
-  /* fonts */
+@theme {
   --font-inter: Inter, sans-serif;
 
-  /* colors */
   --color-lwsGreen: #00d991;
   --color-deepDark: #17181c;
   --color-mediumDark: #1e1f24;
