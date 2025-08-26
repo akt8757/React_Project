@@ -18,7 +18,7 @@ const useDownload = () => {
       const blobUrl = URL.createObjectURL(getBlob);
       const a = document.createElement("a");
       a.href = blobUrl;
-      a.download = `image-${seed}.jpg`;
+      a.download = `tuhin-${seed}.jpg`;
       a.click();
       URL.revokeObjectURL(blobUrl);
 
