@@ -5,10 +5,12 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setToken } from "../../../features/authSlice";
 import { setUser } from "../../../features/authSlice";
+import useApi from "../../../hooks/useApi";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { apiCaller } = useApi();
 
   const {
     register,
@@ -19,13 +21,15 @@ const LoginForm = () => {
   const submitForm = async (formData) => {
     const apiUrl = import.meta.env.VITE_API_URL;
     try {
-      const response = await axios.post(`${apiUrl}/auth/login`, formData);
+      const response = await apiCaller(() =>
+        axios.post(`${apiUrl}/auth/login`, formData)
+      );
 
       if (response.status === 200) {
         const { user, token } = response.data;
         dispatch(setToken(token));
         dispatch(setUser(user));
-        navigate("/Profile");
+        navigate("/");
       }
     } catch (error) {
       console.log(error.message);

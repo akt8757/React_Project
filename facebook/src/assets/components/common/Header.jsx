@@ -32,7 +32,10 @@ const Header = () => {
 
           <Logout />
 
-          <Link to="/me" className="flex items-center flex-center !ml-8 gap-3">
+          <Link
+            to="/profile"
+            className="flex items-center flex-center !ml-8 gap-3"
+          >
             <span className="text-lg font-medium lg:text-xl">
               {user.firstName} {user.lastName}
             </span>

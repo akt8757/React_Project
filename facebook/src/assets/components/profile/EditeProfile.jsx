@@ -3,64 +3,55 @@ import { useSelector } from "react-redux";
 import editIcon from "../../icons/edit.svg";
 import { FaCheck } from "react-icons/fa";
 import useAxios from "../../../hooks/useAxios";
-import { useDispatch } from "react-redux";
-import { setProfileUser, setAvatar } from "../../../features/profileSlice";
-import useGlobale from "../../../hooks/useGlobal";
 import { useRef } from "react";
 import useToster from "../../../hooks/useToster";
+import { Spin } from "antd";
+import useApi from "../../../hooks/useApi";
 
-export default function EditeProfile() {
-  const { setLoadingState, setErrorState } = useGlobale();
-  const dispatch = useDispatch();
+export default function EditeProfile({ fetchProfile }) {
   const user = useSelector((state) => state.profile.user);
   const [bioEdite, setBioEdite] = useState(false);
   const [bio, setBio] = useState(user?.bio);
   const api = useAxios();
-  const { contextHolder, successToster, errorToster, warningToster } =
-    useToster();
+  const { contextHolder, successToster, errorToster } = useToster();
+  const { apiCaller, loading, error } = useApi();
+  const takePictureRef = useRef();
+
   // bio edite functionality
   const handleSaveBio = async () => {
     try {
-      const response = await api.patch(`/profile/${user.id}`, { bio: bio });
+      const response = await apiCaller(() =>
+        api.patch(`/profile/${user.id}`, { bio: bio })
+      );
       if (response.status === 200) {
-        setLoadingState(true);
-        dispatch(setProfileUser(response.data));
         successToster("Bio update successfully complited");
         setBioEdite(false);
+        fetchProfile();
       }
-    } catch (error) {
-      const err = error.message;
-      console.error(err);
-      setErrorState(err);
+    } catch (err) {
+      console.error("API Error:", err);
       errorToster(err);
-    } finally {
-      setLoadingState(false);
     }
   };
 
   // profile picture edite functonality
-  const takePictureRef = useRef();
-
   const handleChange = async (e) => {
     const file = e.target.files[0];
+    const formData = new FormData();
+    formData.append("avatar", file);
+
     try {
-      setLoadingState(true);
-      const formData = new FormData();
-      formData.append("avatar", file);
-      const response = await api.post(`/profile/${user.id}/avatar`, formData);
+      const response = await apiCaller(() =>
+        api.post(`/profile/${user.id}/avatar`, formData)
+      );
+
       if (response.status === 200) {
-        const { message, avatar } = response.data;
-        console.log(response.data);
-        dispatch(setAvatar(avatar));
-        successToster(message);
+        successToster("Bio update successfully complited");
+        fetchProfile();
       }
-    } catch (error) {
-      const err = error.message;
-      console.error(err);
-      setErrorState(err);
+    } catch (err) {
+      console.error("API Error:", err);
       errorToster(err);
-    } finally {
-      setLoadingState(false);
     }
   };
 
@@ -74,9 +65,9 @@ export default function EditeProfile() {
       <div className="flex flex-col items-center py-8 text-center">
         <div className="relative mb-8 max-h-[180px] max-w-[180px] rounded-full lg:mb-11 lg:max-h-[218px] lg:max-w-[218px]">
           <img
-            className="max-w-full rounded-full"
+            className="max-w-full h-40 rounded-full"
             src={`${import.meta.env.VITE_API_URL}/${user.avatar}`}
-            alt="sumit saha"
+            alt={user.avatar}
           />
 
           <button

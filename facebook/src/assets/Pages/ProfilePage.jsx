@@ -4,48 +4,44 @@ import { useSelector } from "react-redux";
 import { setProfileUser } from "../../features/profileSlice";
 import { useDispatch } from "react-redux";
 import EditeProfile from "../components/profile/EditeProfile";
+import PostList from "../components/posts/PostList";
+import useApi from "../../hooks/useApi";
+import useToster from "../../hooks/useToster";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.user);
-
   const [newUser, setNewUser] = useState({});
   const [newPost, setNewPost] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const { apiCaller, loading, error } = useApi();
+  const { errorToster } = useToster();
   const api = useAxios();
 
-  useEffect(() => {
-    // const apiUrl = import.meta.env.VITE_API_URL;
-    const fetchProfile = async () => {
-      try {
-        setLoading(true);
-        const response = await api.get(`profile/${userId.id}`);
+  const fetchProfile = async () => {
+    try {
+      const response = await apiCaller(() => api.get(`profile/${userId.id}`));
+      if (response.status === 200) {
         const { user, posts } = response.data;
         setNewUser(user);
         setNewPost(posts);
         dispatch(setProfileUser(user));
-      } catch (error) {
-        console.error(error);
-        setError(error);
-      } finally {
-        setLoading(false);
       }
-    };
+    } catch (error) {
+      console.error(error);
+      errorToster(error);
+    }
+  };
+  useEffect(() => {
+    // const apiUrl = import.meta.env.VITE_API_URL;
     fetchProfile();
   }, []);
 
-  if (loading === true) {
-    return (
-      <>
-        <h1>Loading Profile...</h1>
-      </>
-    );
-  }
   return (
-    <main>
+    <main className="mx-auto max-w-[1020px] py-8">
       <div className="container">
-        <EditeProfile />
+        <EditeProfile fetchProfile={fetchProfile} />
+        <PostList posts={newPost} />
       </div>
     </main>
   );
